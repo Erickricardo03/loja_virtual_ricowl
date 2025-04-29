@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import junit.framework.TestCase;
 import lojavirtual.ricowl.LojaVirtualRicowlApplication;
 import lojavirtual.ricowl.controller.AcessoController;
 import lojavirtual.ricowl.model.Acesso;
@@ -11,7 +12,7 @@ import lojavirtual.ricowl.repository.AcessoRepository;
 import lojavirtual.ricowl.service.AcessoService;
 
 @SpringBootTest(classes = LojaVirtualRicowlApplication.class)
-public class LojaVirtualRicowlApplicationTests {
+public class LojaVirtualRicowlApplicationTests extends TestCase {
 
 	@Autowired
 	private AcessoService acessoService;
@@ -30,9 +31,10 @@ public class LojaVirtualRicowlApplicationTests {
 	
 	acesso.setDescricao("ROLE_ADMIN");
 	
-	acessoRepository.save(acesso);
+	acesso = acessoController.salvarAcesso(acesso).getBody();
 	
 	
+	assertEquals(true, acesso.getId() > 0 );
 	
 	}
 
